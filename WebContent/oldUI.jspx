@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>OSAP Calculation</title>
+
+<link rel="StyleSheet"
+	href="${pageContext.request.contextPath}/res/mc.css" type="text/css"
+	title="cse4413" media="screen, print" />
+
+<script type="text/javascript"
+src="${pageContext.request.contextPath}/res/mc.js">;</script>
+</head>
+<body>
+	<header>
+		<h1>OSAP Calculator</h1>
+	</header>
+
+	<nav>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Contact Us</a></li>
+		</ul>
+	</nav>
+	<form onsubmit="return validate()" action="Osap" method="POST" class="osapForm" >
+		<fieldset>
+			<legend>${initParam['legendName']}</legend>
+			
+			<c:set var="errorOrNot" value="${errorMessage}" />
+					<c:choose>
+						<c:when test="${empty errorOrNot}">
+						</c:when>
+						<c:otherwise>
+						<p><font color="red">${sessionScope['errorMessage']}</font></p>
+						</c:otherwise>
+					</c:choose>
+					
+			<table>
+				<tr>
+					<td><label for="principal"> Principal <SPAN id="principal-erro">*</SPAN> <BR /> <small>(total
+								loan amount after studies)</small></label></td>
+					<td><input type="number" step="0.01" id="principal"
+						name="principal" value="${sessionScope['principal']}"></input></td>
+				</tr>
+				<tr>
+					<td><label for="interest"> Annual Interest Rate <SPAN id="interest-error">*</SPAN> </label></td>
+					<td><input type="number" step="0.01" id="interest"
+						name="interest" value="${sessionScope['interest']}"></input></td>
+				</tr>
+				<tr>
+					<td><label for="period"> Payment Period  <SPAN id="period-error">*</SPAN><BR /> <small>(total
+								number of months)</small>
+					</label></td>
+					<td><input type="number" step="0.01" id="period" name="period"
+						value="${sessionScope['period']}"></input></td>
+				</tr>
+				<tr>
+					<td><label for="grace"> Grace Period <BR /> <small>(take
+								advantage of 6 month grace period and include grace period in
+								your loan balance)</small>
+					</label></td>
+					<c:set var="checkedOrNot" value="${checked}" />
+					<c:choose>
+						<c:when test="${empty checkedOrNot}">
+							<td><input type="checkbox" name="grace" value="grace">Grace
+									Period</input></td>
+						</c:when>
+						<c:otherwise>
+							<td><input type="checkbox" name="grace" value="grace"
+								checked="checked">Grace Period</input></td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+				<td></td>
+			</table>
+		</fieldset>
+		<button action="submit" name="calculate" value="true">Submit</button>
+	</form>
+
+	<article></article>
+	<aside></aside>
+	<section></section>
+	<footer>
+		<hr />
+
+	</footer>
+</body>
+	</html>
+</jsp:root>

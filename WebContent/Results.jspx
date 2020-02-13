@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1"
+		pageEncoding="ISO-8859-1" session="true" />
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+	<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ResultPage</title>
+<link rel="StyleSheet"
+	href="${pageContext.request.contextPath}/res/mc.css" type="text/css"
+	title="cse4413" media="screen, print" />
+</head>
+<body>
+
+	<header>
+		<h1>Result</h1>
+	</header>
+
+	<nav>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Contact Us</a></li>
+		</ul>
+	</nav>
+
+	<form action="UI.jspx" method="POST" class="resultForm">
+		<fieldset>
+			<legend>${initParam['legendName']}</legend>
+			<table>
+				<tr>
+					<td><strong>Grace Period Interest: </strong></td>
+					<td><f:formatNumber type="currency">${graceInterest}</f:formatNumber></td>
+				</tr>
+				<tr>
+					<td><strong>Monthly payments: </strong></td>
+					<td><f:formatNumber type="currency">${payment}</f:formatNumber></td>
+				</tr>
+				<tr>
+				<td><strong>Calculations are based on a fixed rate based on Prime Rate </strong></td>
+				<td>+${fixedRate}</td>
+				</tr>
+			</table>
+			<button action="restart" name="restart" value="true">Re-compute</button>
+		</fieldset>
+	</form>
+
+
+	<footer>
+		<hr />
+	</footer>
+
+
+</body>
+	</html>
+</jsp:root>
